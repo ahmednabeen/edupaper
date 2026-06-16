@@ -1,0 +1,23 @@
+{% if page_obj.paginator.num_pages > 1 %}
+<nav class="mt-12 flex items-center justify-center gap-1.5">
+  {% if page_obj.has_previous %}
+  <a href="?{% if current_category %}category={{ current_category }}&{% endif %}page={{ page_obj.previous_page_number }}" class="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7 7l-7-7 7-7"/></svg>
+    Prev
+  </a>
+  {% endif %}
+  {% for num in page_obj.paginator.page_range %}
+    {% if num == page_obj.number %}
+      <span class="px-3.5 py-2 text-sm font-semibold text-white bg-sky-700 rounded-lg">{{ num }}</span>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a href="?{% if current_category %}category={{ current_category }}&{% endif %}page={{ num }}" class="px-3.5 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+  <a href="?{% if current_category %}category={{ current_category }}&{% endif %}page={{ page_obj.next_page_number }}" class="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+    Next
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7-7 7"/></svg>
+  </a>
+  {% endif %}
+</nav>
+{% endif %}

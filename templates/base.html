@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}EdupaperHub – Scholarships & Academic Papers for Students{% endblock %}</title>
+  <meta name="description" content="{% block description %}Find fully funded scholarships, internship papers, thesis papers, term papers and project papers — all in one place for students worldwide.{% endblock %}">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%); }
+    .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15); }
+    .category-badge { transition: background 0.2s; }
+    .scholarship-group:hover > .continent-dropdown { opacity: 1; visibility: visible; }
+    .continent-item:hover > .country-dropdown { opacity: 1; visibility: visible; }
+  </style>
+  {% block head_extra %}{% endblock %}
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+  {% block nav %}
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="flex items-center gap-2">
+          <span class="text-2xl font-extrabold tracking-tight text-sky-700">Edupaper<span class="text-amber-500">Hub</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="/" class="text-sm font-medium {% if nav_active == 'home' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">Home</a>
+          <a href="/papers/" class="text-sm font-medium {% if nav_active == 'papers' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">EduPapers</a>
+          <div class="relative scholarship-group">
+            <div class="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-sky-700 transition-colors">
+              <a href="{% url 'all_scholarships' %}" class="{% if nav_active == 'scholarship' or nav_active == 'asia' or nav_active == 'north-america' or nav_active == 'south-america' or nav_active == 'europe' or nav_active == 'india' or nav_active == 'pakistan' or nav_active == 'japan' or nav_active == 'china' or nav_active == 'usa' or nav_active == 'canada' or nav_active == 'mexico' or nav_active == 'brazil' or nav_active == 'argentina' or nav_active == 'chile' or nav_active == 'uk' or nav_active == 'germany' or nav_active == 'france' or nav_active == 'italy' %}text-sky-700{% endif %}">Scholarship</a>
+              <svg class="w-4 h-4 mt-0.5 text-gray-700 {% if nav_active == 'scholarship' or nav_active == 'asia' or nav_active == 'north-america' or nav_active == 'south-america' or nav_active == 'europe' %}text-sky-700{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible continent-dropdown transition-all duration-200">
+              <div class="relative continent-item">
+                <a href="/scholarship/asia/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'asia' or nav_active == 'india' or nav_active == 'pakistan' or nav_active == 'japan' or nav_active == 'china' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">
+                  Asia
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
+                  <a href="/scholarship/asia/india/" class="block px-4 py-2.5 text-sm {% if nav_active == 'india' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">India</a>
+                  <a href="/scholarship/asia/pakistan/" class="block px-4 py-2.5 text-sm {% if nav_active == 'pakistan' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Pakistan</a>
+                  <a href="/scholarship/asia/japan/" class="block px-4 py-2.5 text-sm {% if nav_active == 'japan' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Japan</a>
+                  <a href="/scholarship/asia/china/" class="block px-4 py-2.5 text-sm {% if nav_active == 'china' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">China</a>
+                </div>
+              </div>
+              <div class="relative continent-item">
+                <a href="/scholarship/north-america/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'north-america' or nav_active == 'usa' or nav_active == 'canada' or nav_active == 'mexico' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">
+                  North America
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
+                  <a href="/scholarship/north-america/usa/" class="block px-4 py-2.5 text-sm {% if nav_active == 'usa' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">USA</a>
+                  <a href="/scholarship/north-america/canada/" class="block px-4 py-2.5 text-sm {% if nav_active == 'canada' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Canada</a>
+                  <a href="/scholarship/north-america/mexico/" class="block px-4 py-2.5 text-sm {% if nav_active == 'mexico' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">Mexico</a>
+                </div>
+              </div>
+              <div class="relative continent-item">
+                <a href="/scholarship/south-america/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'south-america' or nav_active == 'brazil' or nav_active == 'argentina' or nav_active == 'chile' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">
+                  South America
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
+                  <a href="/scholarship/south-america/brazil/" class="block px-4 py-2.5 text-sm {% if nav_active == 'brazil' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">Brazil</a>
+                  <a href="/scholarship/south-america/argentina/" class="block px-4 py-2.5 text-sm {% if nav_active == 'argentina' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Argentina</a>
+                  <a href="/scholarship/south-america/chile/" class="block px-4 py-2.5 text-sm {% if nav_active == 'chile' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">Chile</a>
+                </div>
+              </div>
+              <div class="relative continent-item">
+                <a href="/scholarship/europe/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'europe' or nav_active == 'uk' or nav_active == 'germany' or nav_active == 'france' or nav_active == 'italy' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">
+                  Europe
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
+                  <a href="/scholarship/europe/uk/" class="block px-4 py-2.5 text-sm {% if nav_active == 'uk' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">UK</a>
+                  <a href="/scholarship/europe/germany/" class="block px-4 py-2.5 text-sm {% if nav_active == 'germany' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Germany</a>
+                  <a href="/scholarship/europe/france/" class="block px-4 py-2.5 text-sm {% if nav_active == 'france' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">France</a>
+                  <a href="/scholarship/europe/italy/" class="block px-4 py-2.5 text-sm {% if nav_active == 'italy' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">Italy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="/blog/" class="text-sm font-medium {% if nav_active == 'blog' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">Blog</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-sky-700 hover:bg-sky-800 rounded-full transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            Search
+          </button>
+          <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
+      <div class="px-4 py-3 space-y-1">
+        <a href="/" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Home</a>
+        <a href="/papers/" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">EduPapers</a>
+        <a href="{% url 'all_scholarships' %}" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Scholarship</a>
+        <a href="/blog/" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Blog</a>
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+
+  {% block content %}{% endblock %}
+
+  {% block footer %}
+  <footer class="bg-gray-900 text-gray-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-white">Edupaper<span class="text-amber-400">Hub</span></span>
+          <p class="mt-4 text-sm leading-relaxed">Your one-stop platform for scholarships and academic papers. Empowering students worldwide with free educational resources.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Quick Links</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="/about/" class="text-sm hover:text-white transition-colors">About Us</a></li>
+            <li><a href="/contact/" class="text-sm hover:text-white transition-colors">Contact</a></li>
+            <li><a href="/papers/" class="text-sm hover:text-white transition-colors">EduPapers</a></li>
+            <li><a href="{% url 'all_scholarships' %}" class="text-sm hover:text-white transition-colors">Scholarship</a></li>
+            <li><a href="/blog/" class="text-sm hover:text-white transition-colors">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Categories</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="/papers/" class="text-sm hover:text-white transition-colors">Academic Papers</a></li>
+            <li><a href="{% url 'all_scholarships' %}" class="text-sm hover:text-white transition-colors">All Scholarships</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Legal</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="/privacy-policy/" class="text-sm hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms-conditions/" class="text-sm hover:text-white transition-colors">Terms & Conditions</a></li>
+            <li><a href="#" class="text-sm hover:text-white transition-colors">SiteMap</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm">&copy; 2026 EdupaperHub. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-white transition-colors" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+          </a>
+          <a href="#" class="hover:text-white transition-colors" aria-label="Twitter">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+          </a>
+          <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+  </script>
+  {% endblock %}
+</body>
+</html>

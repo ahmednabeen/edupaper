@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}All Scholarships – EdupaperHub{% endblock %}
+{% block description %}Browse all fully funded scholarships worldwide for international students.{% endblock %}
+
+{% block content %}
+
+<section class="py-16 md:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <span class="text-xs font-semibold tracking-widest uppercase text-sky-700 bg-sky-50 px-3 py-1 rounded-full">Scholarships</span>
+      <h1 class="mt-4 text-4xl md:text-5xl font-extrabold text-gray-900">All Scholarships</h1>
+      <p class="mt-3 text-gray-500 max-w-xl mx-auto">Discover fully funded scholarship opportunities from around the world.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for scholarship in page_obj %}
+      <article class="bg-white rounded-2xl overflow-hidden border border-gray-200 card-hover">
+        <a href="{% url 'scholarship_detail' scholarship.region scholarship.country|slugify scholarship.slug %}">
+          <img src="{{ scholarship.image_url|default:'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80' }}" alt="{{ scholarship.title }}" class="w-full h-48 object-cover" loading="lazy">
+        </a>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+              {% if scholarship.region == 'asia' %}bg-amber-50 text-amber-700
+              {% elif scholarship.region == 'europe' %}bg-purple-50 text-purple-700
+              {% elif scholarship.region == 'north-america' %}bg-sky-50 text-sky-700
+              {% elif scholarship.region == 'south-america' %}bg-green-50 text-green-700
+              {% endif %}">{{ scholarship.get_region_display }}</span>
+            <span class="text-xs text-gray-400">{{ scholarship.country }}</span>
+            <span class="text-xs text-gray-400">{{ scholarship.created_at|date:'M d, Y' }}</span>
+          </div>
+          <h3 class="font-bold text-gray-900 leading-snug">
+            <a href="{% url 'scholarship_detail' scholarship.region scholarship.country|slugify scholarship.slug %}" class="hover:text-sky-700 transition-colors">{{ scholarship.title }}</a>
+          </h3>
+          <p class="mt-2 text-sm text-gray-500 line-clamp-2">{{ scholarship.description }}</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xs text-gray-400"><span class="font-medium text-gray-600">EdupaperHub</span></span>
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <div class="col-span-full text-center py-20">
+        <svg class="w-16 h-16 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        <h3 class="mt-4 text-lg font-semibold text-gray-500">No scholarships yet</h3>
+        <p class="mt-2 text-sm text-gray-400">Check back soon for new opportunities.</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% include '_pagination.html' %}
+  </div>
+</section>
+
+{% endblock %}
