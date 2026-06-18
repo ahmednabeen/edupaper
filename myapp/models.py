@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 
 class Paper(models.Model):
@@ -14,7 +15,7 @@ class Paper(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     description = models.TextField()
-    content = models.TextField(blank=True)
+    content = RichTextField(blank=True, config_name='default')
     image_url = models.URLField(max_length=500, blank=True)
     is_published = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,7 +45,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     excerpt = models.TextField()
-    content = models.TextField()
+    content = RichTextField(config_name='default')
     image_url = models.URLField(max_length=500, blank=True)
     is_published = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -75,7 +76,7 @@ class Scholarship(models.Model):
     region = models.CharField(max_length=50, choices=REGION_CHOICES)
     country = models.CharField(max_length=100)
     description = models.TextField()
-    content = models.TextField(blank=True)
+    content = RichTextField(blank=True, config_name='default')
     image_url = models.URLField(max_length=500, blank=True)
     deadline = models.DateField(null=True, blank=True)
     is_published = models.BooleanField(default=True)

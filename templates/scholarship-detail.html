@@ -37,9 +37,9 @@
         </div>
 
         <div class="mt-8 prose prose-gray max-w-none">
-          <p class="text-lg leading-relaxed text-gray-700">{{ scholarship.description }}</p>
+          {{ scholarship.description|linebreaksbr }}
           {% if scholarship.content %}
-          <div class="mt-6 text-gray-600 leading-relaxed">{{ scholarship.content|linebreaks }}</div>
+          {{ scholarship.content|safe|linebreaksbr }}
           {% endif %}
         </div>
 

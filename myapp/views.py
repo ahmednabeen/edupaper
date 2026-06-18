@@ -33,8 +33,9 @@ def index(request):
     })
 
 
-def paper_list(request):
-    category = request.GET.get('category')
+def paper_list(request, category=None):
+    if category is None:
+        category = request.GET.get('category')
     qs = Paper.objects.filter(is_published=True)
     if category:
         qs = qs.filter(category=category)

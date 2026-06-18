@@ -13,8 +13,177 @@
     .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15); }
     .category-badge { transition: background 0.2s; }
-    .scholarship-group:hover > .continent-dropdown { opacity: 1; visibility: visible; }
-    .continent-item:hover > .country-dropdown { opacity: 1; visibility: visible; }
+
+    .prose {
+      /* Color Palette */
+      --prose-body: #334155;       /* Slate 700 - Softer than black */
+      --prose-heading: #0f172a;    /* Slate 900 - Strong contrast */
+      --prose-accent: #4f46e5;     /* Indigo 600 - Modern primary color */
+      --prose-accent-light: #e0e7ff; /* Indigo 100 - For backgrounds */
+      --prose-muted: #64748b;      /* Slate 500 - For secondary text */
+      --prose-border: #e2e8f0;
+      
+      /* Layout */
+      max-width: 72ch;
+      color: var(--prose-body);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Modern Font Stack */
+      font-size: 1.0625rem; /* Slightly larger base for better readability */
+      line-height: 1.75;
+    }
+
+    /* Links with Animated Underline */
+    .prose a {
+      color: var(--prose-accent);
+      text-decoration: none;
+      font-weight: 600;
+      background-image: linear-gradient(to right, var(--prose-accent), var(--prose-accent));
+      background-size: 0% 2px;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      transition: all 0.2s ease-in-out;
+      border-radius: 2px;
+    }
+    .prose a:hover {
+      background-size: 100% 2px;
+      color: #4338ca; /* Indigo 700 */
+    }
+
+    /* Typography Hierarchy */
+    .prose p { margin: 1.5em 0; }
+    
+    .prose h1, .prose h2, .prose h3, .prose h4 {
+      color: var(--prose-heading);
+      font-weight: 800;
+      letter-spacing: -0.025em; /* Tight tracking for modern look */
+      line-height: 1.2;
+    }
+
+    .prose h1 { 
+      font-size: 2.75rem; 
+      margin: 0 0 1rem; 
+      letter-spacing: -0.04em; 
+      background: linear-gradient(135deg, var(--prose-heading) 0%, var(--prose-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .prose h2 { font-size: 1.875rem; margin: 2.5em 0 1em; padding-bottom: 0.5rem; border-bottom: 1px solid var(--prose-border); }
+    .prose h3 { font-size: 1.5rem; margin: 2em 0 0.75em; }
+    .prose h4 { font-size: 1.25rem; margin: 1.5em 0 0.5em; color: var(--prose-body); }
+
+    /* Modern Lists */
+    .prose ul, .prose ol { margin: 1.5em 0; padding-left: 1.75rem; }
+    .prose li { margin: 0.75em 0; padding-left: 0.25rem; }
+    
+    /* Custom Bullet Points */
+    .prose ul { list-style-type: none; }
+    .prose ul li::before {
+      content: "•";
+      color: var(--prose-accent);
+      font-weight: bold;
+      display: inline-block; 
+      width: 1em;
+      margin-left: -1em;
+    }
+    .prose ol li::marker { color: var(--prose-accent); font-weight: 600; }
+
+    /* "Glassy" Blockquotes */
+    .prose blockquote {
+      margin: 2em 0;
+      padding: 1.5em 2em;
+      border-left: 4px solid var(--prose-accent);
+      background: linear-gradient(to right, var(--prose-accent-light), rgba(255,255,255,0));
+      color: var(--prose-heading);
+      font-style: italic;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Images with Shadow & Radius */
+    .prose img {
+      max-width: 100%; 
+      height: auto; 
+      border-radius: 12px;
+      margin: 2em auto; 
+      display: block;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15); /* Soft lift */
+      transition: transform 0.3s ease;
+    }
+    .prose img:hover {
+      transform: scale(1.01); /* Subtle zoom on hover */
+    }
+
+    /* Inline Code */
+    .prose code {
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      background: #f1f5f9; 
+      color: #e11d48; /* Rose 600 - Higher contrast */
+      padding: 0.2em 0.4em; 
+      border-radius: 6px; 
+      font-size: 0.875em;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Code Blocks (IDE Style) */
+    .prose pre {
+      background: #1e293b; /* Slate 800 */
+      color: #e2e8f0;
+      padding: 1.5em;
+      border-radius: 12px;
+      overflow-x: auto; 
+      margin: 2em 0;
+      font-size: 0.9rem; 
+      line-height: 1.6;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border: 1px solid #334155;
+    }
+    .prose pre code { 
+      background: none; 
+      color: inherit; 
+      padding: 0; 
+      font-size: 1em; 
+      border: none;
+    }
+
+    /* Tables with Modern Stripes & Hover */
+    .prose table {
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 2em 0;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      overflow: hidden; /* Rounds corners of table */
+      box-shadow: 0 0 0 1px var(--prose-border);
+    }
+    .prose th { 
+      background: #f8fafc; 
+      color: var(--prose-heading); 
+      font-weight: 700; 
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 1em;
+    }
+    .prose td { padding: 1em; border-bottom: 1px solid var(--prose-border); }
+    .prose tr:last-child td { border-bottom: none; }
+    .prose tr:hover td { background: #f8fafc; } /* Row hover effect */
+
+    /* HR */
+    .prose hr { 
+      margin: 3em 0; 
+      border: none; 
+      height: 1px;
+      background-image: linear-gradient(to right, transparent, var(--prose-border), transparent);
+    }
+
+    .prose.max-w-none { max-width: none; }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .prose { font-size: 1rem; line-height: 1.7; }
+      .prose h1 { font-size: 2rem; }
+      .prose h2 { font-size: 1.5rem; }
+      .prose h3 { font-size: 1.25rem; }
+      .prose blockquote { padding: 1em 1.5em; }
+    }
   </style>
   {% block head_extra %}{% endblock %}
 </head>
@@ -29,68 +198,55 @@
         </a>
         <div class="hidden md:flex items-center gap-6">
           <a href="/" class="text-sm font-medium {% if nav_active == 'home' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">Home</a>
-          <a href="/papers/" class="text-sm font-medium {% if nav_active == 'papers' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">EduPapers</a>
-          <div class="relative scholarship-group">
-            <div class="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-sky-700 transition-colors">
-              <a href="{% url 'all_scholarships' %}" class="{% if nav_active == 'scholarship' or nav_active == 'asia' or nav_active == 'north-america' or nav_active == 'south-america' or nav_active == 'europe' or nav_active == 'india' or nav_active == 'pakistan' or nav_active == 'japan' or nav_active == 'china' or nav_active == 'usa' or nav_active == 'canada' or nav_active == 'mexico' or nav_active == 'brazil' or nav_active == 'argentina' or nav_active == 'chile' or nav_active == 'uk' or nav_active == 'germany' or nav_active == 'france' or nav_active == 'italy' %}text-sky-700{% endif %}">Scholarship</a>
-              <svg class="w-4 h-4 mt-0.5 text-gray-700 {% if nav_active == 'scholarship' or nav_active == 'asia' or nav_active == 'north-america' or nav_active == 'south-america' or nav_active == 'europe' %}text-sky-700{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </div>
-            <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible continent-dropdown transition-all duration-200">
-              <div class="relative continent-item">
-                <a href="/scholarship/asia/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'asia' or nav_active == 'india' or nav_active == 'pakistan' or nav_active == 'japan' or nav_active == 'china' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">
-                  Asia
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
-                  <a href="/scholarship/asia/india/" class="block px-4 py-2.5 text-sm {% if nav_active == 'india' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">India</a>
-                  <a href="/scholarship/asia/pakistan/" class="block px-4 py-2.5 text-sm {% if nav_active == 'pakistan' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Pakistan</a>
-                  <a href="/scholarship/asia/japan/" class="block px-4 py-2.5 text-sm {% if nav_active == 'japan' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Japan</a>
-                  <a href="/scholarship/asia/china/" class="block px-4 py-2.5 text-sm {% if nav_active == 'china' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">China</a>
-                </div>
-              </div>
-              <div class="relative continent-item">
-                <a href="/scholarship/north-america/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'north-america' or nav_active == 'usa' or nav_active == 'canada' or nav_active == 'mexico' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">
-                  North America
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
-                  <a href="/scholarship/north-america/usa/" class="block px-4 py-2.5 text-sm {% if nav_active == 'usa' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">USA</a>
-                  <a href="/scholarship/north-america/canada/" class="block px-4 py-2.5 text-sm {% if nav_active == 'canada' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Canada</a>
-                  <a href="/scholarship/north-america/mexico/" class="block px-4 py-2.5 text-sm {% if nav_active == 'mexico' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">Mexico</a>
-                </div>
-              </div>
-              <div class="relative continent-item">
-                <a href="/scholarship/south-america/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'south-america' or nav_active == 'brazil' or nav_active == 'argentina' or nav_active == 'chile' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">
-                  South America
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
-                  <a href="/scholarship/south-america/brazil/" class="block px-4 py-2.5 text-sm {% if nav_active == 'brazil' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">Brazil</a>
-                  <a href="/scholarship/south-america/argentina/" class="block px-4 py-2.5 text-sm {% if nav_active == 'argentina' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Argentina</a>
-                  <a href="/scholarship/south-america/chile/" class="block px-4 py-2.5 text-sm {% if nav_active == 'chile' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">Chile</a>
-                </div>
-              </div>
-              <div class="relative continent-item">
-                <a href="/scholarship/europe/" class="flex items-center justify-between px-4 py-2.5 text-sm {% if nav_active == 'europe' or nav_active == 'uk' or nav_active == 'germany' or nav_active == 'france' or nav_active == 'italy' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">
-                  Europe
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-                <div class="absolute left-full top-0 w-48 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible country-dropdown transition-all duration-200">
-                  <a href="/scholarship/europe/uk/" class="block px-4 py-2.5 text-sm {% if nav_active == 'uk' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-t-lg">UK</a>
-                  <a href="/scholarship/europe/germany/" class="block px-4 py-2.5 text-sm {% if nav_active == 'germany' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">Germany</a>
-                  <a href="/scholarship/europe/france/" class="block px-4 py-2.5 text-sm {% if nav_active == 'france' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %}">France</a>
-                  <a href="/scholarship/europe/italy/" class="block px-4 py-2.5 text-sm {% if nav_active == 'italy' %}text-sky-700 bg-sky-50 font-medium{% else %}text-gray-700 hover:bg-sky-50 hover:text-sky-700{% endif %} rounded-b-lg">Italy</a>
-                </div>
+
+          <div class="relative group">
+            <a href="{% url 'paper_list' %}" class="text-sm font-medium {% if nav_active == 'papers' %}text-sky-700{% else %}text-gray-700 group-hover:text-sky-700{% endif %} transition-colors flex items-center gap-1">
+              EduPapers
+              <svg class="w-3.5 h-3.5 mt-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="py-2">
+                <a href="{% url 'paper_internship' %}" class="block px-4 py-2.5 text-sm text-gray-700 hover:text-sky-700 hover:bg-sky-50 transition-colors">Internship Paper</a>
+                <a href="{% url 'paper_thesis' %}" class="block px-4 py-2.5 text-sm text-gray-700 hover:text-sky-700 hover:bg-sky-50 transition-colors">Thesis Paper</a>
+                <a href="{% url 'paper_term' %}" class="block px-4 py-2.5 text-sm text-gray-700 hover:text-sky-700 hover:bg-sky-50 transition-colors">Term Paper</a>
+                <a href="{% url 'paper_project' %}" class="block px-4 py-2.5 text-sm text-gray-700 hover:text-sky-700 hover:bg-sky-50 transition-colors">Project Paper</a>
               </div>
             </div>
           </div>
+
+          <div class="relative group">
+            <a href="{% url 'all_scholarships' %}" class="text-sm font-medium {% if nav_active == 'scholarship' %}text-sky-700{% else %}text-gray-700 group-hover:text-sky-700{% endif %} transition-colors flex items-center gap-1">
+              Scholarship
+              <svg class="w-3.5 h-3.5 mt-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="py-2">
+                {% for region in navbar_regions %}
+                <div class="relative group/sub px-2">
+                  <a href="{% url 'scholarship_list' region.slug %}" class="flex items-center justify-between px-3 py-2.5 text-sm font-semibold text-gray-900 hover:text-sky-700 hover:bg-sky-50 rounded-lg transition-colors">
+                    {{ region.name }}
+                    <svg class="w-3 h-3 -rotate-90 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                  </a>
+                  {% if region.countries %}
+                  <div class="absolute left-full top-0 ml-1 w-48 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50">
+                    <div class="py-1">
+                      {% for country in region.countries %}
+                      <a href="{% url 'scholarship_country' region.slug country|slugify %}" class="block px-4 py-2 text-sm text-gray-600 hover:text-sky-700 hover:bg-sky-50 transition-colors">{{ country }}</a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+                {% if not forloop.last %}<div class="border-t border-gray-100 mx-3"></div>{% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
           <a href="/blog/" class="text-sm font-medium {% if nav_active == 'blog' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">Blog</a>
         </div>
         <div class="flex items-center gap-3">
-          <button class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-sky-700 hover:bg-sky-800 rounded-full transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            Search
-          </button>
+
           <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
@@ -100,8 +256,37 @@
     <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
       <div class="px-4 py-3 space-y-1">
         <a href="/" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Home</a>
-        <a href="/papers/" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">EduPapers</a>
-        <a href="{% url 'all_scholarships' %}" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Scholarship</a>
+
+        <div class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-sky-50">
+          <a href="{% url 'paper_list' %}" class="text-sm font-medium text-gray-700 hover:text-sky-700">EduPapers</a>
+          <button id="mobilePapersToggle" class="p-1 hover:bg-sky-100 rounded-lg cursor-pointer">
+            <svg id="mobilePapersArrow" class="w-3.5 h-3.5 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>
+        <div id="mobilePapersSub" class="hidden pl-4 space-y-1">
+          <a href="{% url 'paper_internship' %}" class="block px-3 py-2 text-sm text-gray-600 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Internship Paper</a>
+          <a href="{% url 'paper_thesis' %}" class="block px-3 py-2 text-sm text-gray-600 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Thesis Paper</a>
+          <a href="{% url 'paper_term' %}" class="block px-3 py-2 text-sm text-gray-600 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Term Paper</a>
+          <a href="{% url 'paper_project' %}" class="block px-3 py-2 text-sm text-gray-600 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Project Paper</a>
+        </div>
+
+        <div class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-sky-50">
+          <a href="{% url 'all_scholarships' %}" class="text-sm font-medium text-gray-700 hover:text-sky-700">Scholarship</a>
+          <button id="mobileScholarshipToggle" class="p-1 hover:bg-sky-100 rounded-lg cursor-pointer">
+            <svg id="mobileScholarshipArrow" class="w-3.5 h-3.5 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>
+        <div id="mobileScholarshipSub" class="hidden pl-4 space-y-1">
+          {% for region in navbar_regions %}
+          <div>
+            <a href="{% url 'scholarship_list' region.slug %}" class="block px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">{{ region.name }}</a>
+            {% for country in region.countries %}
+            <a href="{% url 'scholarship_country' region.slug country|slugify %}" class="block pl-6 pr-3 py-1.5 text-xs text-gray-500 hover:bg-sky-50 hover:text-sky-700 rounded-lg">{{ country }}</a>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+
         <a href="/blog/" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-sky-50 hover:text-sky-700 rounded-lg">Blog</a>
       </div>
     </div>
@@ -165,6 +350,20 @@
     document.getElementById('menuBtn').addEventListener('click', function() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     });
+
+    function setupMobileToggle(btnId, subId, arrowId) {
+      var btn = document.getElementById(btnId);
+      var sub = document.getElementById(subId);
+      var arrow = document.getElementById(arrowId);
+      if (btn) {
+        btn.addEventListener('click', function() {
+          sub.classList.toggle('hidden');
+          if (arrow) arrow.classList.toggle('rotate-180');
+        });
+      }
+    }
+    setupMobileToggle('mobilePapersToggle', 'mobilePapersSub', 'mobilePapersArrow');
+    setupMobileToggle('mobileScholarshipToggle', 'mobileScholarshipSub', 'mobileScholarshipArrow');
   </script>
   {% endblock %}
 </body>

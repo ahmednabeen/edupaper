@@ -41,9 +41,9 @@
         </div>
 
         <div class="mt-8 prose prose-gray max-w-none">
-          <p class="text-lg leading-relaxed text-gray-700">{{ paper.description }}</p>
+          {{ paper.description|linebreaksbr }}
           {% if paper.content %}
-            <div class="mt-6 text-gray-600 leading-relaxed">{{ paper.content|linebreaks }}</div>
+            {{ paper.content|safe|linebreaksbr }}
           {% endif %}
         </div>
 
