@@ -11,7 +11,7 @@
 
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
         Your Gateway to<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-400">Scholarships & Academic Papers</span>
+        <span class="text-amber-400">Scholarships & Academic Papers</span>
       </h1>
       <p class="mt-5 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
         Discover fully funded scholarships worldwide and access internship, thesis, term & project papers — all free for students.
@@ -72,15 +72,16 @@
         <span class="text-xs font-semibold tracking-widest uppercase text-sky-700 bg-sky-50 px-3 py-1 rounded-full">Latest</span>
         <h2 class="mt-4 text-3xl md:text-4xl font-extrabold text-gray-900">Recent Opportunities</h2>
       </div>
-      <a href="{% url 'all_scholarships' %}" class="mt-4 sm:mt-0 inline-flex items-center gap-1 text-sm font-medium text-sky-700 hover:text-sky-800 transition-colors">
-        View All <span>&rarr;</span>
-      </a>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for scholarship in latest_scholarships %}
       <article class="bg-white rounded-2xl overflow-hidden border border-gray-200 card-hover">
         <a href="{% url 'scholarship_detail' scholarship.region scholarship.country|slugify scholarship.slug %}">
-          <img src="{{ scholarship.image_url|default:'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80' }}" alt="{{ scholarship.title }}" class="w-full h-48 object-cover" loading="lazy">
+          {% if scholarship.image_url %}
+          <img src="{{ scholarship.image_url }}" alt="{{ scholarship.title }}" class="w-full h-48 object-cover aspect-card" loading="lazy" width="600" height="400" crossorigin="anonymous" referrerpolicy="no-referrer">
+          {% else %}
+          <img src="{% static 'img/placeholder-card.svg' %}" alt="{{ scholarship.title }}" class="w-full h-48 object-cover aspect-card" loading="lazy" width="600" height="400">
+          {% endif %}
         </a>
         <div class="p-5">
           <div class="flex items-center gap-2 mb-3">
@@ -90,7 +91,7 @@
               {% elif scholarship.region == 'north-america' %}bg-sky-50 text-sky-700
               {% elif scholarship.region == 'south-america' %}bg-green-50 text-green-700
               {% endif %}">{{ scholarship.region|title }}</span>
-            <span class="text-xs text-gray-400">{{ scholarship.created_at|date:'M d, Y' }}</span>
+            <span class="text-xs text-gray-500">{{ scholarship.created_at|date:'M d, Y' }}</span>
           </div>
           <h3 class="font-bold text-gray-900 leading-snug">
             <a href="{% url 'scholarship_detail' scholarship.region scholarship.country|slugify scholarship.slug %}" class="hover:text-sky-700 transition-colors">{{ scholarship.title }}</a>
@@ -103,7 +104,7 @@
       </article>
       {% empty %}
       <div class="col-span-full text-center py-16">
-        <p class="text-gray-400">No scholarships available yet. Check back soon!</p>
+        <p class="text-gray-500">No scholarships available yet. Check back soon!</p>
       </div>
       {% endfor %}
     </div>
@@ -125,7 +126,7 @@
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {% for region in regions %}
       <a href="{% url 'scholarship_list' region.slug %}" class="group relative rounded-2xl overflow-hidden h-56 card-hover">
-        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&q=80" alt="{{ region.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        <img src="{% static 'img/placeholder-card.svg' %}" alt="{{ region.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 aspect-card" loading="lazy" width="600" height="400">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
         <div class="absolute bottom-0 left-0 right-0 p-5">
           <h3 class="text-xl font-bold text-white">{{ region.name }}</h3>
@@ -165,11 +166,12 @@
     <span class="text-xs font-semibold tracking-widest uppercase text-sky-700 bg-sky-50 px-3 py-1 rounded-full">Stay Updated</span>
     <h2 class="mt-4 text-3xl md:text-4xl font-extrabold text-gray-900">Get New Opportunities Directly</h2>
     <p class="mt-3 text-gray-500 max-w-lg mx-auto">Subscribe to our newsletter and be the first to know about new scholarships and academic papers.</p>
-    <form class="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-      <input type="email" placeholder="Enter your email" class="flex-1 px-5 py-3.5 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm">
+    <form method="post" action="{% url 'subscribe' %}" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+      {% csrf_token %}
+      <input type="email" name="email" placeholder="Enter your email" required class="flex-1 px-5 py-3.5 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 text-sm">
       <button type="submit" class="px-6 py-3.5 bg-sky-700 hover:bg-sky-800 text-white font-semibold rounded-full transition-colors text-sm whitespace-nowrap">Subscribe</button>
     </form>
-    <p class="mt-4 text-xs text-gray-400">No spam. Unsubscribe anytime.</p>
+    <p class="mt-4 text-xs text-gray-500">No spam. Unsubscribe anytime.</p>
   </div>
 </section>
 {% endblock %}

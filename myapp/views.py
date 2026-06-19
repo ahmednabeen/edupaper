@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.core.paginator import Paginator
-from .models import Paper, BlogPost, Scholarship
+from django.contrib import messages
+from .models import Paper, BlogPost, Scholarship, Subscriber
 
 REGION_META = {
     'asia': {'name': 'Asia', 'color': 'amber', 'description': 'Asian countries'},
@@ -135,6 +136,20 @@ def all_scholarships(request):
         'nav_active': 'scholarship',
         'page_obj': page_obj,
     })
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST.get('email', '').strip()
+        if email:
+            _, created = Subscriber.objects.get_or_create(email=email, defaults={'is_active': True})
+            if created:
+                messages.success(request, 'You have been subscribed successfully!')
+            else:
+                messages.info(request, 'This email is already subscribed.')
+        else:
+            messages.error(request, 'Please enter a valid email address.')
+    return redirect('index')
 
 
 def about(request):

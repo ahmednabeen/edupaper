@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('subscribe/', views.subscribe, name='subscribe'),
     path('papers/internship/', views.paper_list, {'category': 'internship'}, name='paper_internship'),
     path('papers/thesis/', views.paper_list, {'category': 'thesis'}, name='paper_thesis'),
     path('papers/term/', views.paper_list, {'category': 'term'}, name='paper_term'),

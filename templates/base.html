@@ -5,275 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}EdupaperHub – Scholarships & Academic Papers for Students{% endblock %}</title>
   <meta name="description" content="{% block description %}Find fully funded scholarships, internship papers, thesis papers, term papers and project papers — all in one place for students worldwide.{% endblock %}">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <style>
-    body { font-family: 'Inter', sans-serif; }
     .gradient-hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%); }
-    .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15); }
-    .category-badge { transition: background 0.2s; }
-
-    .prose {
-      /* Color Palette */
-      --prose-body: #334155;       /* Slate 700 - Softer than black */
-      --prose-heading: #0f172a;    /* Slate 900 - Strong contrast */
-      --prose-accent: #4f46e5;     /* Indigo 600 - Modern primary color */
-      --prose-accent-light: #e0e7ff; /* Indigo 100 - For backgrounds */
-      --prose-muted: #64748b;      /* Slate 500 - For secondary text */
-      --prose-border: #e2e8f0;
-      
-      /* Layout */
-      max-width: 72ch;
-      color: var(--prose-body);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Modern Font Stack */
-      font-size: 1.0625rem; /* Slightly larger base for better readability */
-      line-height: 1.75;
-    }
-
-    /* Links with Animated Underline */
-    .prose a {
-      color: var(--prose-accent);
-      text-decoration: none;
-      font-weight: 600;
-      background-image: linear-gradient(to right, var(--prose-accent), var(--prose-accent));
-      background-size: 0% 2px;
-      background-repeat: no-repeat;
-      background-position: left bottom;
-      transition: all 0.2s ease-in-out;
-      border-radius: 2px;
-    }
-    .prose a:hover {
-      background-size: 100% 2px;
-      color: #4338ca; /* Indigo 700 */
-    }
-
-    /* Typography Hierarchy */
-    .prose p { margin: 0.5em 0; }
-    
-    .prose h1, .prose h2, .prose h3, .prose h4 {
-      color: var(--prose-heading);
-      font-weight: 800;
-      letter-spacing: -0.025em; /* Tight tracking for modern look */
-      line-height: 1.2;
-    }
-
-    .prose h1 { 
-      font-size: 2.75rem; 
-      margin: 0 0 0.1rem; 
-      letter-spacing: -0.04em; 
-      background: linear-gradient(135deg, var(--prose-heading) 0%, var(--prose-accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .prose h2 { font-size: 1.875rem; margin: 1.5em 0 1em; padding-bottom: 1.2rem; border-bottom: 1px solid var(--prose-border); }
-    .prose h3 { font-size: 1.5rem; margin: 1.2em 0 0.75em; }
-    .prose h4 { font-size: 1.25rem; margin: 0.7em 0 0.5em; color: var(--prose-body); }
-
-    /* Modern Lists */
-    .prose ul, .prose ol { margin: 0.5em 0; padding-left: 1.75rem; }
-    .prose li { margin: 0.25em 0; padding-left: 0.25rem; }
-    .prose li > ul, .prose li > ol { margin: 0.25em 0; }
-    
-    /* Custom Bullet Points */
+    .prose { max-width: 72ch; color: #334155; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 1.0625rem; line-height: 1.75; }
+    .prose a { color: #4f46e5; text-decoration: none; font-weight: 600; background-image: linear-gradient(to right, #4f46e5, #4f46e5); background-size: 0% 2px; background-repeat: no-repeat; background-position: left bottom; transition: all .2s ease-in-out; border-radius: 2px; }
+    .prose a:hover { background-size: 100% 2px; color: #4338ca; }
+    .prose p { margin: .5em 0; }
+    .prose h1, .prose h2, .prose h3, .prose h4 { color: #0f172a; font-weight: 800; letter-spacing: -.025em; line-height: 1.2; }
+    .prose h1 { font-size: 2.75rem; margin: 0 0 0.1rem; letter-spacing: -.04em; background: linear-gradient(135deg, #0f172a 0%, #4f46e5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .prose h2 { font-size: 1.875rem; margin: 1.5em 0 1em; padding-bottom: 1.2rem; border-bottom: 1px solid #e2e8f0; }
+    .prose h3 { font-size: 1.5rem; margin: 1.2em 0 .75em; }
+    .prose h4 { font-size: 1.25rem; margin: .7em 0 .5em; color: #334155; }
+    .prose ul, .prose ol { margin: .5em 0; padding-left: 1.75rem; }
+    .prose li { margin: .25em 0; padding-left: .25rem; }
+    .prose li>ul, .prose li>ol { margin: .25em 0; }
     .prose ul { list-style-type: none; }
-    .prose ul > li::before {
-      content: "•";
-      color: var(--prose-accent);
-      font-weight: bold;
-      display: inline-block; 
-      width: 1em;
-      margin-left: -1em;
-    }
-    .prose ol > li::marker { color: var(--prose-accent); font-weight: 600; }
-
-    /* "Glassy" Blockquotes */
-    .prose blockquote {
-      margin: 0.5em 0;
-      padding: 1.5em 2em;
-      border-left: 4px solid var(--prose-accent);
-      background: linear-gradient(to right, var(--prose-accent-light), rgba(255,255,255,0));
-      color: var(--prose-heading);
-      font-style: italic;
-      border-radius: 0 8px 8px 0;
-    }
-
-    /* Images with Shadow & Radius */
-    .prose img {
-      max-width: 100%; 
-      height: auto; 
-      border-radius: 12px;
-      margin: 0.5em auto; 
-      display: block;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15); /* Soft lift */
-      transition: transform 0.3s ease;
-    }
-    .prose img:hover {
-      transform: scale(1.01); /* Subtle zoom on hover */
-    }
-
-    /* Inline Code */
-    .prose code {
-      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
-      background: #f1f5f9; 
-      color: #e11d48;
-      padding: 0.2em 0.4em; 
-      border-radius: 6px; 
-      font-size: 0.875em;
-      border: 1px solid #e2e8f0;
-    }
-
-    /* Code Blocks */
-    .prose pre {
-      background: #1e293b;
-      color: #e2e8f0;
-      padding: 1.5em;
-      border-radius: 12px;
-      overflow-x: auto; 
-      margin: 0.5em 0;
-      font-size: 0.9rem; 
-      line-height: 1.6;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      border: 1px solid #334155;
-    }
-    .prose pre code { 
-      background: none; 
-      color: inherit; 
-      padding: 0; 
-      font-size: 1em; 
-      border: none;
-    }
-
-    /* Tables */
-    .prose .table-wrapper {
-      overflow-x: auto;
-      margin: 0.5em 0;
-      border-radius: 8px;
-      box-shadow: 0 0 0 1px var(--prose-border);
-    }
-    .prose table {
-      width: 100%; 
-      border-collapse: collapse; 
-      font-size: 0.95rem;
-      min-width: max-content;
-    }
-    .prose th { 
-      background: #f8fafc; 
-      color: var(--prose-heading); 
-      font-weight: 700; 
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      padding: 1em;
-      text-align: left;
-    }
-    .prose td { padding: 1em; border-bottom: 1px solid var(--prose-border); }
+    .prose ul>li::before { content: "\2022"; color: #4f46e5; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+    .prose ol>li::marker { color: #4f46e5; font-weight: 600; }
+    .prose blockquote { margin: .5em 0; padding: 1.5em 2em; border-left: 4px solid #4f46e5; background: linear-gradient(to right, #e0e7ff, rgba(255,255,255,0)); color: #0f172a; font-style: italic; border-radius: 0 8px 8px 0; }
+    .prose img { max-width: 100%; height: auto; border-radius: 12px; margin: .5em auto; display: block; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.15); transition: transform .3s ease; }
+    .prose img:hover { transform: scale(1.01); }
+    .prose code { font-family: 'JetBrains Mono','Fira Code',Consolas,monospace; background: #f1f5f9; color: #e11d48; padding: .2em .4em; border-radius: 6px; font-size: .875em; border: 1px solid #e2e8f0; }
+    .prose pre { background: #1e293b; color: #e2e8f0; padding: 1.5em; border-radius: 12px; overflow-x: auto; margin: .5em 0; font-size: .9rem; line-height: 1.6; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06); border: 1px solid #334155; }
+    .prose pre code { background: none; color: inherit; padding: 0; font-size: 1em; border: none; }
+    .prose .table-wrapper { overflow-x: auto; margin: .5em 0; border-radius: 8px; box-shadow: 0 0 0 1px #e2e8f0; }
+    .prose table { width: 100%; border-collapse: collapse; font-size: .95rem; min-width: max-content; }
+    .prose th { background: #f8fafc; color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: .75rem; letter-spacing: .05em; padding: 1em; text-align: left; }
+    .prose td { padding: 1em; border-bottom: 1px solid #e2e8f0; }
     .prose tr:last-child td { border-bottom: none; }
     .prose tr:hover td { background: #f8fafc; }
-
-    /* HR */
-    .prose hr { 
-      margin: 3em 0; 
-      border: none; 
-      height: 1px;
-      background-image: linear-gradient(to right, transparent, var(--prose-border), transparent);
-    }
-
-    /* Inline formatting */
-    .prose strong, .prose b { font-weight: 700; color: var(--prose-heading); }
+    .prose hr { margin: 3em 0; border: none; height: 1px; background-image: linear-gradient(to right, transparent, #e2e8f0, transparent); }
+    .prose strong, .prose b { font-weight: 700; color: #0f172a; }
     .prose em, .prose i { font-style: italic; }
     .prose u { text-decoration: underline; text-underline-offset: 2px; }
-    .prose s, .prose strike, .prose del { text-decoration: line-through; color: var(--prose-muted); }
-    .prose mark {
-      background: #fef9c3;
-      color: var(--prose-heading);
-      padding: 0.1em 0.2em;
-      border-radius: 3px;
-    }
-    .prose sub { font-size: 0.75em; vertical-align: sub; }
-    .prose sup { font-size: 0.75em; vertical-align: super; }
-    .prose small { font-size: 0.875em; color: var(--prose-muted); }
-    .prose cite { font-style: italic; color: var(--prose-muted); }
-    .prose abbr[title] { cursor: help; border-bottom: 1px dotted var(--prose-muted); }
-    .prose address { font-style: normal; color: var(--prose-muted); margin: 0.5em 0; }
-
-    /* Definition lists */
-    .prose dl { margin: 0.5em 0; }
-    .prose dt { font-weight: 700; color: var(--prose-heading); margin-top: 0.5em; }
-    .prose dd { margin-left: 1.5em; color: var(--prose-body); }
-
-    /* Figures & captions */
+    .prose s, .prose strike, .prose del { text-decoration: line-through; color: #64748b; }
+    .prose mark { background: #fef9c3; color: #0f172a; padding: .1em .2em; border-radius: 3px; }
+    .prose sub { font-size: .75em; vertical-align: sub; }
+    .prose sup { font-size: .75em; vertical-align: super; }
+    .prose small { font-size: .875em; color: #64748b; }
+    .prose cite { font-style: italic; color: #64748b; }
+    .prose abbr[title] { cursor: help; border-bottom: 1px dotted #64748b; }
+    .prose address { font-style: normal; color: #64748b; margin: .5em 0; }
+    .prose dl { margin: .5em 0; }
+    .prose dt { font-weight: 700; color: #0f172a; margin-top: .5em; }
+    .prose dd { margin-left: 1.5em; color: #334155; }
     .prose figure { margin: 1em 0; text-align: center; }
-    .prose figcaption {
-      font-size: 0.875rem;
-      color: var(--prose-muted);
-      margin-top: 0.5em;
-      font-style: italic;
-    }
-
-    /* Embedded content */
-    .prose iframe, .prose video, .prose embed, .prose object {
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 0.5em 0;
-    }
-    .prose .embed-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 0.5em 0;
-    }
-    .prose .embed-wrapper iframe,
-    .prose .embed-wrapper video,
-    .prose .embed-wrapper embed,
-    .prose .embed-wrapper object {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border-radius: 0;
-    }
-
-    /* Alignment helpers (from ckeditor) */
+    .prose figcaption { font-size: .875rem; color: #64748b; margin-top: .5em; font-style: italic; }
+    .prose iframe, .prose video, .prose embed, .prose object { max-width: 100%; border-radius: 12px; margin: .5em 0; }
+    .prose .embed-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: .5em 0; }
+    .prose .embed-wrapper iframe, .prose .embed-wrapper video, .prose .embed-wrapper embed, .prose .embed-wrapper object { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; border-radius: 0; }
     .prose .text-left { text-align: left; }
     .prose .text-center { text-align: center; }
     .prose .text-right { text-align: right; }
     .prose .text-justify { text-align: justify; }
-
-    .prose .align-left {
-      float: left;
-      margin-right: 1em;
-      margin-bottom: 0.5em;
-    }
-    .prose .align-right {
-      float: right;
-      margin-left: 1em;
-      margin-bottom: 0.5em;
-    }
-    .prose .align-center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .prose .align-left, .prose .align-right {
-      max-width: 50%;
-    }
-
+    .prose .align-left { float: left; margin-right: 1em; margin-bottom: .5em; }
+    .prose .align-right { float: right; margin-left: 1em; margin-bottom: .5em; }
+    .prose .align-center { display: block; margin-left: auto; margin-right: auto; }
+    .prose .align-left, .prose .align-right { max-width: 50%; }
     .prose.max-w-none { max-width: none; }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-      .prose { font-size: 1rem; line-height: 1.7; }
-      .prose h1 { font-size: 2rem; }
-      .prose h2 { font-size: 1.5rem; }
-      .prose h3 { font-size: 1.25rem; }
-      .prose blockquote { padding: 1em 1.5em; }
-    }
+    @media (max-width:768px) { .prose { font-size: 1rem; line-height: 1.7; } .prose h1 { font-size: 2rem; } .prose h2 { font-size: 1.5rem; } .prose h3 { font-size: 1.25rem; } .prose blockquote { padding: 1em 1.5em; } }
   </style>
   {% block head_extra %}{% endblock %}
 </head>
@@ -284,7 +81,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <a href="/" class="flex items-center gap-2">
-          <span class="text-2xl font-extrabold tracking-tight text-sky-700">Edupaper<span class="text-amber-500">Hub</span></span>
+          <span class="text-2xl font-extrabold tracking-tight text-sky-700">Edupaper<span class="text-amber-600">Hub</span></span>
         </a>
         <div class="hidden md:flex items-center gap-6">
           <a href="/" class="text-sm font-medium {% if nav_active == 'home' %}text-sky-700{% else %}text-gray-700 hover:text-sky-700{% endif %} transition-colors">Home</a>
@@ -294,7 +91,7 @@
               EduPapers
               <svg class="w-3.5 h-3.5 mt-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </a>
-            <div class="absolute left-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="nav-dropdown absolute left-0 w-52 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div class="py-2">
                 <a href="{% url 'paper_internship' %}" class="block px-4 py-2.5 text-sm text-gray-700 hover:text-sky-700 hover:bg-sky-50 transition-colors">Internship Paper</a>
                 <a href="{% url 'paper_thesis' %}" class="block px-4 py-2.5 text-sm text-gray-700 hover:text-sky-700 hover:bg-sky-50 transition-colors">Thesis Paper</a>
@@ -309,7 +106,7 @@
               Scholarship
               <svg class="w-3.5 h-3.5 mt-0.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </a>
-            <div class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="nav-dropdown absolute left-0 w-56 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div class="py-2">
                 {% for region in navbar_regions %}
                 <div class="relative group/sub px-2">
@@ -337,7 +134,7 @@
         </div>
         <div class="flex items-center gap-3">
 
-          <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <button id="menuBtn" aria-label="Toggle navigation menu" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
         </div>
@@ -383,7 +180,20 @@
   </nav>
   {% endblock %}
 
-  {% block content %}{% endblock %}
+  {% if messages %}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    {% for message in messages %}
+    <div class="px-4 py-3 rounded-lg text-sm font-medium
+      {% if message.tags == 'success' %}bg-green-100 text-green-800
+      {% elif message.tags == 'error' %}bg-red-100 text-red-800
+      {% else %}bg-blue-100 text-blue-800{% endif %}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main id="main-content">{% block content %}{% endblock %}</main>
 
   {% block footer %}
   <footer class="bg-gray-900 text-gray-400">
@@ -394,24 +204,24 @@
           <p class="mt-4 text-sm leading-relaxed">Your one-stop platform for scholarships and academic papers. Empowering students worldwide with free educational resources.</p>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Quick Links</h4>
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Quick Links</h3>
           <ul class="mt-4 space-y-2">
             <li><a href="/about/" class="text-sm hover:text-white transition-colors">About Us</a></li>
             <li><a href="/contact/" class="text-sm hover:text-white transition-colors">Contact</a></li>
             <li><a href="/papers/" class="text-sm hover:text-white transition-colors">EduPapers</a></li>
             <li><a href="{% url 'all_scholarships' %}" class="text-sm hover:text-white transition-colors">Scholarship</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Categories</h3>
+          <ul class="mt-4 space-y-2">
+            <li><a href="/papers/" class="text-sm hover:text-white transition-colors">Academic Papers</a></li>
+            <li><a href="{% url 'all_scholarships' %}" class="text-sm hover:text-white transition-colors">All Scholarships</a></li>
             <li><a href="/blog/" class="text-sm hover:text-white transition-colors">Blog</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Categories</h4>
-          <ul class="mt-4 space-y-2">
-            <li><a href="/papers/" class="text-sm hover:text-white transition-colors">Academic Papers</a></li>
-            <li><a href="{% url 'all_scholarships' %}" class="text-sm hover:text-white transition-colors">All Scholarships</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Legal</h4>
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Legal</h3>
           <ul class="mt-4 space-y-2">
             <li><a href="/privacy-policy/" class="text-sm hover:text-white transition-colors">Privacy Policy</a></li>
             <li><a href="/terms-conditions/" class="text-sm hover:text-white transition-colors">Terms & Conditions</a></li>

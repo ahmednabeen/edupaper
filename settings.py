@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'myapp.middleware.SecurityHeadersMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'
@@ -60,6 +62,7 @@ TEMPLATES = [
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
+            'builtins': ['django.templatetags.static'],
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -130,7 +133,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
         'height': 400,
         'width': '100%',
-        'contentsCss': ['https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4', '/static/css/ckeditor.css'],
+        'contentsCss': ['/static/css/ckeditor.css'],
         'bodyClass': 'prose prose-gray max-w-none',
         'extraPlugins': 'codesnippet,image2,tableresize',
     },
