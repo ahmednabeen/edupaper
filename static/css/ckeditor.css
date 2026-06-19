@@ -1,0 +1,65 @@
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #334155;
+  max-width: 72ch;
+  padding: 1em;
+}
+
+a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 { color: #0f172a; font-weight: 800; letter-spacing: -0.025em; line-height: 1.2; }
+h1 { font-size: 2.75rem; margin: 0 0 0.1rem; }
+h2 { font-size: 1.875rem; margin: 1em 0 0.5em; padding-bottom: 0.2rem; border-bottom: 1px solid #e2e8f0; }
+h3 { font-size: 1.5rem; margin: 0.75em 0 0.2em; }
+h4 { font-size: 1.25rem; margin: 0.5em 0 0.2em; }
+
+p { margin: 0.5em 0; }
+
+ul, ol { margin: 0.5em 0; padding-left: 1.75rem; }
+li { margin: 0.25em 0; }
+
+blockquote {
+  margin: 0.5em 0;
+  padding: 1.5em 2em;
+  border-left: 4px solid #4f46e5;
+  background: linear-gradient(to right, #e0e7ff, rgba(255,255,255,0));
+  color: #0f172a;
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+}
+
+img { max-width: 100%; height: auto; border-radius: 12px; margin: 0.5em auto; display: block; }
+
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1.5em;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+  font-size: 0.9rem;
+  border: 1px solid #334155;
+}
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  background: #f1f5f9;
+  color: #e11d48;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  font-size: 0.875em;
+  border: 1px solid #e2e8f0;
+}
+pre code { background: none; color: inherit; padding: 0; font-size: 1em; border: none; }
+
+table { width: 100%; border-collapse: collapse; margin: 0.5em 0; font-size: 0.95rem; }
+th { background: #f8fafc; color: #0f172a; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; padding: 1em; text-align: left; }
+td { padding: 1em; border-bottom: 1px solid #e2e8f0; }
+tr:hover td { background: #f8fafc; }
+
+hr { margin: 3em 0; border: none; height: 1px; background: linear-gradient(to right, transparent, #e2e8f0, transparent); }
+
+strong, b { font-weight: 700; color: #0f172a; }
+em, i { font-style: italic; }

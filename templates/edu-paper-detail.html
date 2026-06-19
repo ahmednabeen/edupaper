@@ -43,7 +43,7 @@
         <div class="mt-8 prose prose-gray max-w-none">
           {{ paper.description|linebreaksbr }}
           {% if paper.content %}
-            {{ paper.content|safe|linebreaksbr }}
+            {{ paper.content|safe }}
           {% endif %}
         </div>
 
